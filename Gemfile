@@ -4,15 +4,23 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.beta1'
 
+# Using PostgreSQL accross the entire cycle
+gem 'pg', '0.14.1' 
+
 group :development, :test do
-  gem 'sqlite3', '1.3.7'
   gem 'rspec-rails', '2.13.0'
+  gem 'guard-rspec', '2.5.0'
+  gem 'spork-rails', github: 'railstutorial/spork-rails'
+  gem 'guard-spork', '1.5.0'
 end
 
 # Gems used for testing
 group :test do
   gem 'selenium-webdriver', '2.0'
   gem 'capybara', '2.1.0.beta1'
+  
+  gem 'rb-fsevent', '0.9.3', :require => false
+  gem 'growl', '1.0.3'
 end
 
 # Gems used only for assets and not required
@@ -33,11 +41,6 @@ gem 'turbolinks', '1.0.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '1.0.1'
-
-# Production assets grouping - PostgreSQL gem for deployment to Heroku
-group :production do
-  gem 'pg', '0.14.1' 
-end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
