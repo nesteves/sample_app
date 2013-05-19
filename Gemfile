@@ -7,6 +7,9 @@ gem 'rails', '4.0.0.beta1'
 # Used to convert LESS from Bootstrap to Sass and to make all the necessary Bootstrap files available
 gem 'bootstrap-sass', '2.3.0.1'
 
+# Hash function used to encrypt passwords
+gem 'bcrypt-ruby', '3.0.1'
+
 # Using PostgreSQL accross the entire cycle
 gem 'pg', '0.14.1' 
 
@@ -44,9 +47,6 @@ gem 'turbolinks', '1.0.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '1.0.1'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
