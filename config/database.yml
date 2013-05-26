@@ -7,7 +7,7 @@ development:
   port: 5432
   username: nunoesteves
   
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: sampleapp_test
@@ -15,3 +15,5 @@ test:
   host: localhost
   port: 5432
   username: nunoesteves
+cucumber:
+  <<: *test
