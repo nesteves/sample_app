@@ -10,13 +10,21 @@ gem 'bootstrap-sass', '2.3.0.1'
 # Hash function used to encrypt passwords
 gem 'bcrypt-ruby', '3.0.1'
 
+# Used to easily generate fake semi-realistic sample data
+gem 'faker', '1.1.2'
+
+# Gems used to implement pagination in the users page; the bootstrap gem configures the will_paginate gem to use its
+# pagination styles
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
+
 # Using PostgreSQL accross the entire cycle
 gem 'pg', '0.14.1' 
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
-  gem 'spork-rails', github: 'railstutorial/spork-rails'
+  gem 'spork-rails', github: 'railstutorial/spork-rails' 
   gem 'guard-spork', '1.5.0'
 end
 
