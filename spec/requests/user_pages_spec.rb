@@ -118,6 +118,17 @@ describe "UserPages" do
 
 			it { should have_error_message('error') }
 		end
+
+		describe "forbidden attributes" do
+			let(:params) do
+				{ user: { admin: true,
+									password: user.password,
+									password_confirmation: user.password } }
+			end
+
+			before { patch user_path(user), params }
+			specify { expect(user.reload).not_to be_admin }
+		end
 	end
 
 	describe "profile page" do
