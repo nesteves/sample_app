@@ -18,9 +18,29 @@ RSpec::Matchers.define :have_success_message do |message|
   end
 end
 
+RSpec::Matchers.define :have_contents do |*contents|
+  match do |page|
+    contents.each do |content|
+      expect(page).to have_content(content)
+    end
+  end
+end
+
 def create_user(options={})
   options = {name: "Michael Hartl", email: "michael@example.org"}.merge options
 	FactoryGirl.create(:user, name: options[:name], email: options[:email])
+end
+
+def create_micropost(user, options={})
+  options = {content: 'Lorem ipsum'}.merge options
+  FactoryGirl.create(:micropost, user: user, content: options[:content])
+end
+
+def create_microposts(user)
+  m1 = FactoryGirl.create(:micropost, user: user, created_at: 1.week.ago)
+  m2 = FactoryGirl.create(:micropost, user: user, created_at: 1.day.ago)
+  m3 = FactoryGirl.create(:micropost, user: user, created_at: 1.hour.ago)
+  [m1, m2, m3]
 end
 
 def insert_valid_signup_info
@@ -46,5 +66,11 @@ end
 RSpec::Matchers.define :change_number_of_users do
   match do |page|
     expect { click_button submit }.to change(User, :count).by(1)
+  end
+end
+
+RSpec::Matchers.define :change_number_of_microposts do
+  match do |page|
+    expect { click_button "Post" }.to change(Micropost, :count).by(1)
   end
 end

@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:microposts) }
 
 	it { should be_valid }
   it { should_not be_admin }
@@ -132,4 +133,32 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
+
+  describe "micropost associations" do
+    before { @user.save }
+    let!(:unordered_microposts) { create_microposts(@user) }
+
+    it "should have the right microposts in the right order" do
+      expect(@user.microposts.to_a).to eq unordered_microposts.reverse
+    end
+
+    it "should destroy associated microposts when the parent user is destroyed" do
+      microposts = @user.microposts.to_a
+      @user.destroy
+      expect(microposts).not_to be_empty
+      microposts.each do |micropost|
+        expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
+
+    describe "status" do
+      let(:microposts) { @user.microposts.to_a }
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
+      end
+
+      its(:feed) { should include(*microposts) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
+  end    
 end
