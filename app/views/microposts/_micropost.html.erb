@@ -4,6 +4,6 @@
 		Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 	</span>
   <% if current_user?(micropost.user) %>
-    <%= render 'shared/micropost_delete_link' %>
+    <%= render 'shared/micropost_delete_link', feed_item: micropost %>
   <% end %>
 </li>

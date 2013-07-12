@@ -9,6 +9,6 @@
 	</span>
 
   <% if current_user?(feed_item.user) %>
-    <%= render 'shared/micropost_delete_link' %>
+    <%= render 'shared/micropost_delete_link', feed_item: feed_item %>
   <% end %>
 </li>
