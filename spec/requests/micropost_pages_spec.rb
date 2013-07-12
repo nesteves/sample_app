@@ -56,5 +56,15 @@ describe "Micropost pages" do
     end
 
     it { should have_content "35 microposts"}
+
+    describe "should not display delete links for a different user" do
+      let(:another_user) { create_user name: "Another User", email: "another@email.com" }
+      before do
+        sign_in another_user
+        visit user_path(user)
+      end
+
+      it { should_not have_link "delete" }
+    end
   end
 end
