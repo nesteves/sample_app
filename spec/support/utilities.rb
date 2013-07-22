@@ -50,7 +50,7 @@ def insert_valid_signup_info
   fill_in "Confirm Password", with: "foobar"
 end
 
-def sign_in(user)
+def sign_in(user, options={})
   visit signin_path
   fill_in "Email",    with: user.email
   fill_in "Password", with: user.password
